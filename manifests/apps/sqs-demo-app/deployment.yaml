@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ack-demo
+  name: ack-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ack-demo
+  template:
+    metadata:
+      labels:
+        app: ack-demo
+    spec:
+      serviceAccountName: ack-demo
+      containers:
+      - image: docker.io/dtsulik/ack-demo:v2
+        name: sender
+        env:
+        - name: MODE
+          value: send
+        - name: QUEUE
+          value: ack-demo
+        - name: AWS_REGION
+          value: us-east-1
+      - image: docker.io/dtsulik/ack-demo:v2
+        name: receiver
+        env:
+        - name: MODE
+          value: recv
+        - name: QUEUE
+          value: ack-demo
+        - name: AWS_REGION
+          value: us-east-1

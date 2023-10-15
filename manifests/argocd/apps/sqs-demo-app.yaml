@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sqs-demo-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/dtsulik/aws-cloud-day-2023-aws-ack-talk.git
+    targetRevision: HEAD
+    path: manifests/apps/sqs-demo-app
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sqs-demo-app
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

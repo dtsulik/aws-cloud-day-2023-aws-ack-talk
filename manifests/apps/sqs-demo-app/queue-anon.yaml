@@ -1,0 +1,20 @@
+apiVersion: sqs.services.k8s.aws/v1alpha1
+kind: Queue
+metadata:
+  name: ack-demo
+  annotations:
+    services.k8s.aws/region: us-east-1
+spec:
+  queueName: ack-demo
+  policy: |
+    {
+      "Statement": [{
+        "Sid": "AnonAccess",
+        "Effect": "Allow",
+        "Principal": {
+          "AWS": "*"
+        },
+        "Action": ["sqs:DeleteMessage", "sqs:ReceiveMessage", "sqs:SendMessage"],
+        "Resource": "arn:aws:sqs:*:*:*"
+      }]
+    }
