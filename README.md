@@ -1,14 +1,8 @@
-# aws-cloud-day-2023-aws-ack-talk
+# aws-cloud-day-2023-aws-ack
 
-## general idea
-Small talk about how we can use aws ack to provision
-ephemeral envs.
+## General idea
 
-- use eks with IRSA (IAM Roles for ServiceAccounts)
-- use ack obviously
-- argo will make things much easier
-- if possible throw in argo workflows + argo events
-- if possible add some ticketing system to above
+ACK (AWS Controller for Kubernetes) can be used to homogenize the ci/cd pipelines and developer platform interaction. Not all of the infra can live this way (chicken and egg problem) base k8s (one that will act as control plane) will have to come from somewhere. Rest of the infra can be managed from k8s. This does not mean it is mean to replace all of existing IaC, but can be used in places where flexibility of k8s pipelines and tooling around it comes in handy, specifically in this case ephemeral envs.
 
 ## Setup
 
